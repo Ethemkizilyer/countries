@@ -66,7 +66,7 @@ const HomePage: NextPage = () => {
         : dataAllCountries?.data;
 
     const filteredCountries = countriesFromApi?.filter((country) =>
-      country.name.common.toLowerCase().includes(searchValue.toLowerCase())
+      country.name.toLowerCase().includes(searchValue.toLowerCase())
     );
 
     if (!filteredCountries || filteredCountries.length === 0) {

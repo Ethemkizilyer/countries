@@ -12,7 +12,7 @@ const AppLayout: FunctionComponent<AppLayoutProps> = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Countries</title>
+        <title>Countries Explorer</title>
         <meta
           name="description"
           content="A next.js based frontend application that uses the REST Countries V2 API to pull and

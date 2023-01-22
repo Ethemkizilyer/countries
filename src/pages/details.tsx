@@ -102,13 +102,13 @@ const DetailsPage: NextPage<DetailsPageProps> = ({
   const transformArrayToString = (array: any[]) => {
     if (!array || array.length === 0) return "None";
 
-    return array?.map((item) => item?.name)?.join(", ");
+    return array.map((item) => item.name).join(", ");
   };
 
   const renderCountryInfo = () => {
     const subRegionsString = transformArrayToString(regionalBlocs);
-    // const currenciesString = transformArrayToString(currencies);
-    // const languagesString = transformArrayToString(languages);
+    const currenciesString = transformArrayToString(currencies);
+    const languagesString = transformArrayToString(languages);
 
     return (
       <div className="flex flex-col md:flex-row gap-10 md:gap-4 mb-6">
@@ -125,9 +125,9 @@ const DetailsPage: NextPage<DetailsPageProps> = ({
           <InfoRow label="Capital" value={capital} />
         </div>
         <div className="flex flex-col gap-1">
-          {/* <InfoRow label="Top Level Domain" value={topLevelDomain[0]} /> */}
-          {/* <InfoRow label="Currencies" value={currenciesString} /> */}
-          {/* <InfoRow label="Languages" value={languagesString} /> */}
+          <InfoRow label="Top Level Domain" value={topLevelDomain[0]} />
+          <InfoRow label="Currencies" value={currenciesString} />
+          <InfoRow label="Languages" value={languagesString} />
         </div>
       </div>
     );
@@ -147,7 +147,7 @@ const DetailsPage: NextPage<DetailsPageProps> = ({
             // The button below is styled differently to the <Button/> component in the components folder
             // in order to look more like a clickable tag.
             return (
-              <button key={index}
+              <button
                 className="border border-gray-300 mr-2 mt-2 2xl:mt-0 text-lm-very-dark-blue shadow-none
                 font-nunito-light bg-dmlm-white hover:bg-lm-very-light-gray rounded-md text-sm
                  px-4 py-1 focus:outline-none dark:bg-dm-dark-blue dark:hover:bg-dm-very-dark-blue
@@ -186,7 +186,7 @@ const DetailsPage: NextPage<DetailsPageProps> = ({
           />
         </div>
         <div className="flex flex-col justify-center w-full mt-8 md:mt-0 md:w-1/2">
-          <h1 className="text-2xl font-nunito-bold mb-6 md:mb-8">{name.common}</h1>
+          <h1 className="text-2xl font-nunito-bold mb-6 md:mb-8">{name}</h1>
           {renderCountryInfo()}
           {renderBorders()}
         </div>

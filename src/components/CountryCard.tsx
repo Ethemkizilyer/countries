@@ -16,7 +16,7 @@ const CountryCard: FunctionComponent<CountryCardProps> = ({ country }) => {
   return (
     <div
       className="max-w-xs rounded-md overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer"
-      onClick={() => router.push(`/details?countryName=${country.name.common}`)}
+      onClick={() => router.push(`/details?countryName=${country.name}`)}
     >
       <div className={"sm:h-[200px] 2xl:h-[180px] sm:w-[300px]"}>
         <Image
@@ -30,7 +30,7 @@ const CountryCard: FunctionComponent<CountryCardProps> = ({ country }) => {
       </div>
       <div className="px-4 pt-6">
         <p className="font-nunito-bold text-base mb-2 text-lm-very-dark-blue dark:text-dmlm-white">
-          {country.name.common}
+          {country.name}
         </p>
         <div className="flex flex-col gap-1 mb-6">
           <InfoRow

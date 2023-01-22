@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import Button from "./Button";
-import { HiOutlineMoon,HiOutlineSun } from "react-icons/hi";
+import { HiOutlineMoon } from "react-icons/hi";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 
@@ -26,9 +26,9 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
         </Link>
         <div className="mt-2 md:-mr-9">
           <Button
-            text={theme === "light" ? "Light Mode" : "Dark Mode"}
+            text="Dark Mode"
             flat={true}
-            icon={theme === "light" ? <HiOutlineSun size={18} /> : <HiOutlineMoon size={18} />}
+            icon={<HiOutlineMoon size={18} />}
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           />
         </div>
