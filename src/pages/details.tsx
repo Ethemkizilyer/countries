@@ -147,7 +147,7 @@ const DetailsPage: NextPage<DetailsPageProps> = ({
             // The button below is styled differently to the <Button/> component in the components folder
             // in order to look more like a clickable tag.
             return (
-              <button
+              <button key={index}
                 className="border border-gray-300 mr-2 mt-2 2xl:mt-0 text-lm-very-dark-blue shadow-none
                 font-nunito-light bg-dmlm-white hover:bg-lm-very-light-gray rounded-md text-sm
                  px-4 py-1 focus:outline-none dark:bg-dm-dark-blue dark:hover:bg-dm-very-dark-blue
