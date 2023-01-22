@@ -4,11 +4,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AppLayout from "../layouts/AppLayout";
 import { ThemeProvider } from "next-themes";
 
-// Create a QueryClient instance
+// Bir QueryClient örneği oluşturma
 const queryClient = new QueryClient();
 
-// Wrap the App component with the QueryClientProvider component for React-Query support
-// and the AppLayout component for our layout (navbar, footer, etc)
+// React-Query desteği için Uygulama bileşenini QueryClientProvider bileşeniyle sarın
+// ve düzenimiz için uygulama bileşeni (gezinme çubuğu, altbilgi vb.)
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>

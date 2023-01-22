@@ -7,7 +7,7 @@ import { useTheme } from "next-themes";
 interface NavbarProps {}
 
 const Navbar: FunctionComponent<NavbarProps> = () => {
-  // Use the useTheme hook to get the current theme and toggle it
+  // Geçerli temayı almak ve değiştirmek için useTheme kancasını kullanın
   const { theme, setTheme } = useTheme();
 
   return (

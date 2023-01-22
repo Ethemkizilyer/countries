@@ -8,8 +8,8 @@ interface CountryCardProps {
   country: ICountry;
 }
 
-// Card component that displays the country information in the home page
-// and redirects the user to the details page when clicked
+// Ülke bilgilerini ana sayfada görüntüleyen kart bileşeni
+// ve tıklandığında kullanıcıyı ayrıntılar sayfasına yönlendirir
 const CountryCard: FunctionComponent<CountryCardProps> = ({ country }) => {
   const router = useRouter();
 

@@ -16,17 +16,13 @@ const HomePage: NextPage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState<ContinentsType | "">("");
   const [searchValue, setSearchValue] = useState("");
-  // Fetch all countries using React-Query and the getAllCountriesService service when
-  // the component/page mounts. This approach is used to showcase CSR (Client Side Rendering)
-  // and handling of errors/loading states. Also, react-query is configured to refetch from the
-  // API when the window is refocused which might be useful in some cases.
+  // Bileşen/sayfa bağlandığında // React-Query ve getAllCountriesService hizmetini kullanarak tüm ülkeleri getir. Bu yaklaşım, CSR'yi (Client Side Rendering) // ve hataların/yükleme durumlarının işlenmesini göstermek için kullanılır. Ayrıca, tepki sorgusu, pencere yeniden odaklandığında // API'den yeniden getirecek şekilde yapılandırılmıştır, bu bazı durumlarda yararlı olabilir.
   const {
     fetchStatus: fetchStatusAllCountries,
     error: errorAllCountries,
     data: dataAllCountries,
   } = useQuery(["all-countries"], () => getAllCountriesService());
-  // Fetch all countries by region/continent using React-Query and the getCountriesByContinentService service when
-  // there is a filter selected from the Dropdown component.
+  // Dropdown bileşeninden seçilen bir filtre olduğunda // React-Query ve getCountriesByContinentService hizmetini kullanarak tüm ülkeleri bölgeye/kıtaya göre getir.
   const {
     fetchStatus: fetchStatusCountriesByRegion,
     error: errorCountriesByRegion,
@@ -37,8 +33,7 @@ const HomePage: NextPage = () => {
     { enabled: !!selectedFilter && selectedFilter !== "Show All" }
   );
 
-  // Function which renders the countries card grid and handles cases
-  // where there is no data, an error, or the API calls are loading.
+  // Ülkeler kart ızgarasını işleyen ve veri olmadığı, bir hata olduğu veya API çağrılarının yüklendiği durumları işleyen işlev.
   const renderCountryCards = () => {
     if (
       fetchStatusAllCountries === "fetching" ||

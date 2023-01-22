@@ -15,55 +15,54 @@ interface DetailsPageProps {
   borderCountriesNames: string[] | null;
 }
 
-// Use getServerSideProps to fetch data from the API while on the server to
-// avoid the need for the client to fetch the data. This is used to showcase
-// the SSR (Server Side Rendering) approach which in this page does not require
-// the client to fetch the data so no loading state is shown.
+ // Sunucudayken apı'den veri almak için getServerSideProps kullanın
+// istemcinin verileri getirmesine gerek kalmamasını sağlayın. Bu vitrin için kullanılır
+// bu sayfada gerektirmeyen SSR (Sunucu Tarafı Oluşturma) yaklaşımı
+// istemci verileri alır, böylece yükleme durumu gösterilmez.
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  // Set caching headers
+  // Önbelleğe alma başlıklarını ayarla
   context.res?.setHeader(
     "Cache-Control",
     "public, s-maxage=10, stale-while-revalidate=60"
   );
 
-  // Retrieve the countryName from the URL query params
+  // URL sorgu parametrelerinden ülke Adını Al
   let countryName = context?.query?.countryName as string;
 
-  // Remove accents from country name to support cases like Åland Islands
+  // Åland Adaları gibi davaları desteklemek için ülke adasındaki aksanları kaldırın
   countryName = countryName?.normalize("NFD")?.replace(/\p{Diacritic}/gu, "");
 
   const countryData = countryName
     ? await getCountryByNameService(countryName)
     : null;
 
-  // If we don't have country data, go to the 404 page (we could also create a custom 404 page if needed)
+  // Ülke verilerimiz yoksa 404 sayfasına gidin (gerekirse özel bir 404 sayfası da oluşturabiliriz)
   const notFound =
     !countryData || countryData?.ok === false || !countryData?.data;
 
-  // Retrieve the country codes for the countries that border the country we are looking at. We do this
-  // since the API does not provide the country names for the countries that border the country we are
-  // looking at, so we need to make additional API calls (in parallel) to retrieve their names.
+  // Baktığımız ülkeyi sınırlayan ülkelerin ülke kodlarını alın. Bunu yapıyoruz
+  // API, bulunduğumuz ülkeyi sınırlayan ülkeler için ülke adlarını sağlamadığından
+  // baktığımızda, adlarını almak için ek API çağrıları (paralel olarak) yapmamız gerekiyor.
   const borderCountriesCodes =
     countryData?.data && !notFound && countryData?.data[0]?.borders?.length > 0
       ? countryData?.data[0].borders.map((borderCountry) => borderCountry)
       : null;
 
-  // Create an array of Promises that will fetch the data for the countries that border the country we
-  // are looking at
+  // Ülkeyi sınırlayan ülkeler için verileri getirecek bir dizi Söz oluşturun biz
+  // bakıyoruz
   const borderCountriesPromises =
     borderCountriesCodes && borderCountriesCodes.length > 0
       ? borderCountriesCodes.map((item) => getCountryByCodeService(item))
       : null;
 
-  // Wait for all the Promises to either resolve or reject (parallel fetching)
+  // Tüm Vaatlerin çözülmesini veya reddedilmesini bekleyin (paralel getirme)
   const borderCountriesResults = borderCountriesPromises
     ? await Promise.allSettled(borderCountriesPromises)
     : null;
 
-  // Create an array of the country names that border the country we are looking at or show "N/A" in case a
-  // network request failed
+  // Baktığımız ülkenin sınırındaki ülke adlarından oluşan bir dizi oluşturun veya bir ağ isteğinin başarısız olması durumunda "YOK" gösterin //
   const borderCountriesNames = borderCountriesResults
     ? borderCountriesResults.map(
         //@ts-ignore
@@ -144,10 +143,10 @@ const DetailsPage: NextPage<DetailsPageProps> = ({
         </p>
         <div>
           {borderCountriesNames.map((border, index) => {
-            // The button below is styled differently to the <Button/> component in the components folder
-            // in order to look more like a clickable tag.
+            // Aşağıdaki düğme, daha çok tıklanabilir bir etiket gibi görünmesi için bileşenler klasöründeki // <Button/> bileşeninden farklı bir stile sahiptir.
             return (
-              <button key={index}
+              <button
+                key={index}
                 className="border border-gray-300 mr-2 mt-2 2xl:mt-0 text-lm-very-dark-blue shadow-none
                 font-nunito-light bg-dmlm-white hover:bg-lm-very-light-gray rounded-md text-sm
                  px-4 py-1 focus:outline-none dark:bg-dm-dark-blue dark:hover:bg-dm-very-dark-blue
