@@ -1,14 +1,7 @@
 import { FunctionComponent, useRef } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useClickAway } from "react-use";
-
-export type ContinentsType =
-  | "Africa"
-  | "Americas"
-  | "Asia"
-  | "Europe"
-  | "Oceania"
-  | "Show All";
+import { ContinentsType } from "../services";
 
 interface DropdownProps {
   filterArray: ContinentsType[];
@@ -54,7 +47,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
         id="dropdownDefault"
         className="flex z-10 justify-between w-44 shadow-md text-lm-very-dark-blue bg-dmlm-white border
         border-gray-100 dark:border-gray-800 hover:bg-lm-very-light-gray focus:outline-none font-nunito-regular rounded-md text-sm pl-4
-        pr-2 py-2.5 text-center items-center dark:bg-dm-dark-blue dark:hover:bg-dm-very-dark-blue
+        pr-2 py-2.5 text-center  items-center dark:bg-dm-dark-blue dark:hover:bg-dm-very-dark-blue
         dark:text-dmlm-white"
         type="button"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
