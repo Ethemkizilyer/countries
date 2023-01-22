@@ -8,25 +8,25 @@ export type ContinentsType =
 
 export interface ICurrency {
   code: string;
-  name: string;
+  name: { common: "string"; official: "string" };
   symbol: string;
 }
 
 export interface ILanguage {
   iso639_1: string;
   iso639_2: string;
-  name: string;
+  name: { common: string; official: string };
   nativeName: string;
 }
 
 export interface IRegionalBloc {
   acronym: string;
-  name: string;
+  name: { common: string; official: string };
   otherNames: string[];
 }
 
 export interface ICountry {
-  name: string;
+  name: { common: string;official:string};
   topLevelDomain: string[];
   alpha2Code: string;
   alpha3Code: string;

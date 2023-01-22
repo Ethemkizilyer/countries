@@ -1,15 +1,10 @@
-import {ApiResponse, create} from "apisauce"
-import { ContinentsType } from "../pages";
-import { ICountry } from "./countries.dto";
-
-
+import { ApiResponse, create } from "apisauce";
+import { ContinentsType, ICountry } from "./countries.dto";
 
 export const api = create({
   baseURL: "https://restcountries.com/v3.1",
   timeout: 10000,
 });
-
-
 
 export const getAllCountriesService = async () => {
   const countriesFromBE: ApiResponse<ICountry[]> = await api.get("/all");
