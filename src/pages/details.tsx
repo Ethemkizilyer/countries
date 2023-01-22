@@ -1,9 +1,9 @@
 import { GetServerSidePropsContext, NextPage } from "next";
-import { ICountry } from "../services/countries.dto";
 import {
   getCountryByCodeService,
   getCountryByNameService,
-} from "../services/countries";
+  ICountry,
+} from "../services";
 import Button from "../components/Button";
 import { useRouter } from "next/router";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
@@ -92,27 +92,23 @@ const DetailsPage: NextPage<DetailsPageProps> = ({
     population,
     region,
     regionalBlocs,
-    // topLevelDomain,
+    topLevelDomain,
     currencies,
     capital,
     languages,
     flags,
   } = countryInfo[0];
 
-  console.log(name)
-
   const transformArrayToString = (array: any[]) => {
     if (!array || array.length === 0) return "None";
-return Object.keys(array)
-  .map((item) => item)
-  .join(", ");
-    // return array?.map((item) => item.name.common).join(", ");
+
+    return array?.map((item) => item?.name)?.join(", ");
   };
 
   const renderCountryInfo = () => {
-    // const subRegionsString = transformArrayToString(regionalBlocs);
+    const subRegionsString = transformArrayToString(regionalBlocs);
     // const currenciesString = transformArrayToString(currencies);
-    const languagesString = transformArrayToString(languages);
+    // const languagesString = transformArrayToString(languages);
 
     return (
       <div className="flex flex-col md:flex-row gap-10 md:gap-4 mb-6">
@@ -125,13 +121,13 @@ return Object.keys(array)
             }
           />
           <InfoRow label="Region" value={region} />
-          {/* <InfoRow label="Sub Region" value={subRegionsString} /> */}
+          <InfoRow label="Sub Region" value={subRegionsString} />
           <InfoRow label="Capital" value={capital} />
         </div>
         <div className="flex flex-col gap-1">
           {/* <InfoRow label="Top Level Domain" value={topLevelDomain[0]} /> */}
           {/* <InfoRow label="Currencies" value={currenciesString} /> */}
-          <InfoRow label="Languages" value={languagesString} />
+          {/* <InfoRow label="Languages" value={languagesString} /> */}
         </div>
       </div>
     );
@@ -172,20 +168,15 @@ return Object.keys(array)
       className="pt-20 md:pt-32 px-8 md:px-32 pb-12 md:pb-0 bg-dmlm-white dark:bg-dm-very-dark-blue
        min-h-screen"
     >
-      <button onClick={() => router.back()}>
-     
-        <HiOutlineArrowNarrowLeft size={18} />
-        Back
-      </button>
-      {/* <Button
+      <Button
         text="Back"
         onClick={() => router.back()}
         icon={<HiOutlineArrowNarrowLeft size={18} />}
-      /> */}
+      />
       <div className="mt-12 md:mt-20 w-full flex md:justify-between flex-col md:flex-row">
         <div className="w-full md:w-2/5">
           <Image
-            alt={"Flag of " + name.common}
+            alt={"Flag of " + name}
             src={flags?.svg || ""}
             className={"rounded-xl"}
             width={500}

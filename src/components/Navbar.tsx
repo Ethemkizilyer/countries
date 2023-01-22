@@ -1,13 +1,14 @@
-import Link from 'next/link';
-import React, { useState } from 'react'
-import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
-import Button from './Button';
 import { FunctionComponent } from "react";
+import Button from "./Button";
+import { HiOutlineMoon,HiOutlineSun } from "react-icons/hi";
+import Link from "next/link";
+import { useTheme } from "next-themes";
 
 interface NavbarProps {}
 
 const Navbar: FunctionComponent<NavbarProps> = () => {
-  const [theme, setTheme] = useState("light");
+  // Use the useTheme hook to get the current theme and toggle it
+  const { theme, setTheme } = useTheme();
 
   return (
     <nav
@@ -27,14 +28,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
           <Button
             text={theme === "light" ? "Light Mode" : "Dark Mode"}
             flat={true}
-            theme={theme}
-            icon={
-              theme === "light" ? (
-                <HiOutlineSun size={18} />
-              ) : (
-                <HiOutlineMoon size={18} />
-              )
-            }
+            icon={theme === "light" ? <HiOutlineSun size={18} /> : <HiOutlineMoon size={18} />}
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           />
         </div>
@@ -43,4 +37,4 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
   );
 };
 
-export default Navbar
+export default Navbar;

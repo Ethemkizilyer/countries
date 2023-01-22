@@ -64,9 +64,9 @@ const HomePage: NextPage = () => {
       selectedFilter && selectedFilter !== "Show All"
         ? dataCountriesByRegion?.data
         : dataAllCountries?.data;
-console.log(countriesFromApi);
-    const filteredCountries = countriesFromApi?.filter((count) =>
-      count?.name?.common[0]?.toLowerCase()?.includes(searchValue.toLowerCase())
+
+    const filteredCountries = countriesFromApi?.filter((country) =>
+      country.name.common.toLowerCase().includes(searchValue.toLowerCase())
     );
 
     if (!filteredCountries || filteredCountries.length === 0) {
