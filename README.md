@@ -1,3 +1,4 @@
+![countries](https://user-images.githubusercontent.com/106928233/214068675-d0a0dd1a-bfc2-4ac0-965c-44138b22679a.gif)
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 https://countries-7w62.vercel.app/
